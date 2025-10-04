@@ -34,6 +34,6 @@ public class UserDTO {
     private UserRole role; // e.g CUSTOMER, ADMIN
 
     private Boolean isActive;
-    private LocalDateTime;
+    private LocalDateTime localDateTime;
 
 }
