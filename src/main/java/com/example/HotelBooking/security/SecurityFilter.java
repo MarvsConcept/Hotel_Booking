@@ -59,7 +59,11 @@ public class SecurityFilter {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
             throws Exception {
 
+<<<<<<< HEAD
         return authenticationConfiguration.getAuthenticationManager();
+=======
+        return authenticationConfiguration.getAuthenticationManager()
+>>>>>>> 7b1b7a7f3b6b596b319e13dcae87273676cd7e59
     }
 
 

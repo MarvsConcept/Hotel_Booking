@@ -30,7 +30,11 @@ public class Room {
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Room type is required")
+<<<<<<< HEAD
     private RoomType type;
+=======
+    private RoomType roomType;
+>>>>>>> 7b1b7a7f3b6b596b319e13dcae87273676cd7e59
 
     @DecimalMin(value = "0.1", message = "Price per night is required")
     private BigDecimal pricePerNight;
