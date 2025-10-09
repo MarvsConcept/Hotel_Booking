@@ -3,6 +3,7 @@ package com.example.HotelBooking.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,16 +20,23 @@ import java.util.function.Function;
 @Slf4j
 public class JwtUtils {
 
-    private static final long EXPIRATION_TIME_IN_MILSEC =  100L * 60L * 24L * 30L & 6L; // this will expire in 6 Months
+    private static final long EXPIRATION_TIME_IN_MILSEC =  100L * 60L * 24L * 30L * 6L; // this will expire in 6 Months
     private SecretKey key;
 
     @Value("${secretJwtString}")
     private String secretJwtString;
 
+//    @PostConstruct
+//    private void init(){
+//        byte[] keyByte = secretJwtString.getBytes(StandardCharsets.UTF_8);
+//        this.key = new SecretKeySpec(keyByte, "HmacSHA256");
+//    }
+
+
     @PostConstruct
-    private void init(){
+    private void init() {
         byte[] keyByte = secretJwtString.getBytes(StandardCharsets.UTF_8);
-        this.key = new SecretKeySpec(keyByte, "HmacSHA256");
+        this.key = Keys.hmacShaKeyFor(keyByte);
     }
 
     public String generateToken(String email){
