@@ -13,11 +13,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-<<<<<<< HEAD
 @Table(name = "notifications")
-=======
-@Table(name = "payments")
->>>>>>> 7b1b7a7f3b6b596b319e13dcae87273676cd7e59
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,11 +32,7 @@ public class Notification {
     private String bookingReference;
 
     @Enumerated(EnumType.STRING)
-<<<<<<< HEAD
     private NotificationType type;
-=======
-    private NotificationType notificationType;
->>>>>>> 7b1b7a7f3b6b596b319e13dcae87273676cd7e59
 
     private final LocalDateTime createdAt = LocalDateTime.now();
 
