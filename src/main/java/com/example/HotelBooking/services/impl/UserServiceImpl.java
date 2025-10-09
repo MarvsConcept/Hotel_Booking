@@ -15,8 +15,12 @@ import com.example.HotelBooking.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -77,7 +81,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response getAllUsers() {
-        return null;
+        List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<UserDTO> userDTOList = modelMapper.map(users, new TypeToken<List<UserDTO>>(){}.getType());
+
+        return Response.builder()
+                .status(200)
+                .message("Success")
+                .users(userDTOList)
+                .build();
     }
 
     @Override
