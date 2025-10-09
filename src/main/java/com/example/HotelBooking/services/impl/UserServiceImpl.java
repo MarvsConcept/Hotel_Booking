@@ -140,7 +140,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response deleteOwnAccount() {
-        return null;
+        User user = getCurrentLoggedInUser();
+        userRepository.delete(user);
+
+        return Response.builder()
+                .status(200)
+                .message("User Deleted Successfully")
+                .build();
     }
 
     @Override
