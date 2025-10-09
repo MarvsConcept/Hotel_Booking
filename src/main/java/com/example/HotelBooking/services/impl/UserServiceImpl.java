@@ -1,9 +1,7 @@
 package com.example.HotelBooking.services.impl;
 
-import com.example.HotelBooking.dtos.LoginRequest;
-import com.example.HotelBooking.dtos.RegistrationRequest;
-import com.example.HotelBooking.dtos.Response;
-import com.example.HotelBooking.dtos.UserDTO;
+import com.example.HotelBooking.dtos.*;
+import com.example.HotelBooking.entities.Booking;
 import com.example.HotelBooking.entities.User;
 import com.example.HotelBooking.enums.UserRole;
 import com.example.HotelBooking.exceptions.InvalidCredentialException;
@@ -151,6 +149,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response getMyBookingHistory() {
-        return null;
+        User user = getCurrentLoggedInUser();
+        List<Booking> bookingList = bookingRepository.findByUserId(user.getId());
+        List<BookingDTO> bookingDTOList = modelMapper.map(bookingList,
+                new TypeToken<List<BookingDTO>>(){}.getType());
+
+        return Response.builder()
+                .status(200)
+                .message("Success")
+                .bookings(bookingDTOList)
+                .build();
     }
 }
