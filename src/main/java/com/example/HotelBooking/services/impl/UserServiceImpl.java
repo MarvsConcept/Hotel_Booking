@@ -97,6 +97,9 @@ public class UserServiceImpl implements UserService {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("User Not Found"));
+
+        log.info("Inside getOwnAccountDetails user email is {}", email);
+
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 
         return Response.builder()
@@ -117,7 +120,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response updateOwnAccount(UserDTO userDTO) {
-        return null;
+        User existingUser = getCurrentLoggedInUser();
+        log.info("Inside update user");
+        if (userDTO.getEmail() != null) existingUser.setEmail(userDTO.getEmail());
+        if (userDTO.getFirstName() != null) existingUser.setFirstName(userDTO.getEmail());
+        if (userDTO.getLastName() != null) existingUser.setLastName(userDTO.getEmail());
+        if (userDTO.getPhoneNumber() != null) existingUser.setPhoneNumber(userDTO.getEmail());
+
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
+        userRepository.save(existingUser);
+
+        return Response.builder()
+                .status(200)
+                .message("User Updated Successfully")
+                .build();
     }
 
     @Override
