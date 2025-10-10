@@ -125,7 +125,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Response getAvailableRoom(LocalDate checkInDate, LocalDate checkOutDate, RoomType roomType) {
+    public Response getAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate, RoomType roomType) {
 
         //validation: Ensure the check in date is not today
         if (checkInDate.isBefore(LocalDate.now())) {

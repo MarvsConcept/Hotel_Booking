@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -80,6 +81,13 @@ public class RoomController {
         return ResponseEntity.ok(roomService.deleteRoom(id));
     }
 
-
+    @GetMapping("/available")
+    public ResponseEntity<Response> getAvailableRooms(
+            @RequestParam LocalDate checkInDate,
+            @RequestParam LocalDate checkOutDate,
+            @RequestParam (value = "roomNumber", required = false) RoomType roomType
+            ) {
+        return ResponseEntity.ok(roomService.getAvailableRooms(checkInDate, checkOutDate, roomType));
+    }
 
 }
