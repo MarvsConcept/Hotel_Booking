@@ -42,7 +42,6 @@ public class RoomController {
         return ResponseEntity.ok(roomService.addRoom(roomDTO, imageFile));
 }
 
-
     @PutMapping("/update")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> updateRoom(
@@ -86,7 +85,7 @@ public class RoomController {
     public ResponseEntity<Response> getAvailableRooms(
             @RequestParam LocalDate checkInDate,
             @RequestParam LocalDate checkOutDate,
-            @RequestParam (value = "roomNumber", required = false) RoomType roomType
+            @RequestParam (value = "roomType", required = false) RoomType roomType
             ) {
         return ResponseEntity.ok(roomService.getAvailableRooms(checkInDate, checkOutDate, roomType));
     }

@@ -40,7 +40,6 @@ public class RoomServiceImpl implements RoomService {
             String imagePath = saveImage(imageFile);
             roomToSave.setImageUrl(imagePath);
         }
-
         roomRepository.save(roomToSave);
 
         return Response.builder()
@@ -149,7 +148,6 @@ public class RoomServiceImpl implements RoomService {
                 .message("Success")
                 .rooms(roomDTOList)
                 .build();
-
     }
 
     @Override
@@ -169,7 +167,6 @@ public class RoomServiceImpl implements RoomService {
                 .message("Success")
                 .rooms(roomDTOList)
                 .build();
-
     }
 
     private String saveImage(MultipartFile imageFile) {
