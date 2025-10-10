@@ -64,6 +64,10 @@ public class RoomController {
         return ResponseEntity.ok(roomService.updateRoom(roomDTO, imageFile));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<Response> getAllRooms() {
+        return ResponseEntity.ok(roomService.getAllRooms());
+    }
 
 
 
