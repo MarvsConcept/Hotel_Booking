@@ -4,6 +4,7 @@ import com.example.HotelBooking.dtos.Response;
 import com.example.HotelBooking.dtos.RoomDTO;
 import com.example.HotelBooking.entities.Room;
 import com.example.HotelBooking.enums.RoomType;
+import com.example.HotelBooking.exceptions.NotFoundException;
 import com.example.HotelBooking.repositories.RoomRepository;
 import com.example.HotelBooking.services.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +48,36 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response updateRoom(RoomDTO roomDTO, MultipartFile imageFile) {
-        return null;
+        Room existingRoom = roomRepository.findById(roomDTO.getId())
+                .orElseThrow(() -> new NotFoundException("Room not found"));
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imagePath = saveImage(imageFile);
+            existingRoom.setImageUrl(imagePath);
+        }
+
+        if (roomDTO.getRoomNumber() != null && roomDTO.getRoomNumber() >= 0) {
+            existingRoom.setRoomNumber(roomDTO.getRoomNumber());
+        }
+
+        if (roomDTO.getPricePerNight() != null && roomDTO.getPricePerNight().compareTo(BigDecimal.ZERO) >= 0) {
+            existingRoom.setPricePerNight(roomDTO.getPricePerNight());
+        }
+
+        if (roomDTO.getCapacity() != null && roomDTO.getCapacity() > 0) {
+            existingRoom.setCapacity(roomDTO.getCapacity());
+        }
+
+        if (roomDTO.getType() != null) existingRoom.setType(roomDTO.getType());
+
+        if (roomDTO.getDescription() != null) existingRoom.setDescription(roomDTO.getDescription());
+
+        roomRepository.save(existingRoom)
+
+        return Response.builder()
+                .status(200)
+                .message("Room updated successfully")
+                .build();
     }
 
     @Override
@@ -58,6 +89,7 @@ public class RoomServiceImpl implements RoomService {
     public Response getRoomById(Long id) {
         return null;
     }
+
 
     @Override
     public Response deleteRoom(Long id) {
