@@ -21,7 +21,7 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping
+    @PostMapping("/add")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> addRoom(
         @RequestParam Integer roomNumber,

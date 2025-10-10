@@ -2,5 +2,6 @@ package com.example.HotelBooking.enums;
 
 public enum RoomType {
 
-    SIMPLE, DOUBLE, SUIT, TRIPLE
+    SINGLE, DOUBLE, SUIT, TRIPLE
+
 }
