@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -89,5 +90,12 @@ public class RoomController {
             ) {
         return ResponseEntity.ok(roomService.getAvailableRooms(checkInDate, checkOutDate, roomType));
     }
+
+    @GetMapping("/types")
+    public ResponseEntity<List<RoomType>> getAllRoomTypes() {
+        return ResponseEntity.ok(roomService.getAllRoomTypes());
+    }
+
+
 
 }
