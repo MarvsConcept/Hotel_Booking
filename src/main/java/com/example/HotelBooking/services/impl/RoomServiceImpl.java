@@ -96,7 +96,16 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response getRoomById(Long id) {
-        return null;
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Room not found"));
+
+        RoomDTO roomDTO = modelMapper.map(room, RoomDTO.class);
+
+        return Response.builder()
+                .status(200)
+                .message("Success")
+                .room(roomDTO)
+                .build();
     }
 
 
