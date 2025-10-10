@@ -111,7 +111,16 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response deleteRoom(Long id) {
-        return null;
+
+        if (!roomRepository.existsById(id)) {
+            throw new NotFoundException("Room not found");
+        }
+        roomRepository.deleteById(id);
+
+        return Response.builder()
+                .status(200)
+                .message("Room Deleted Successfully")
+                .build();
     }
 
     @Override
