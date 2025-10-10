@@ -10,6 +10,8 @@ import com.example.HotelBooking.services.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,7 +84,14 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response getAllRooms() {
-        return null;
+        List<Room> roomList =  roomRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+
+        List<RoomDTO> roomDTOList = modelMapper.map(roomList, new TypeToken<List<RoomDTO>>() {}.getType());
+        return Response.builder()
+                .status(200)
+                .message("Success")
+                .rooms(roomDTOList)
+                .build();
     }
 
     @Override
