@@ -150,12 +150,11 @@ public class RoomServiceImpl implements RoomService {
                 .rooms(roomDTOList)
                 .build();
 
-
     }
 
     @Override
     public List<RoomType> getAllRoomTypes() {
-        return List.of();
+        return roomRepository.getAllRoomTypes();
     }
 
     @Override
