@@ -72,7 +72,7 @@ public class RoomServiceImpl implements RoomService {
 
         if (roomDTO.getDescription() != null) existingRoom.setDescription(roomDTO.getDescription());
 
-        roomRepository.save(existingRoom)
+        roomRepository.save(existingRoom);
 
         return Response.builder()
                 .status(200)
