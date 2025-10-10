@@ -158,12 +158,19 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Response searchRoom() {
-        return null;
+    public Response searchRoom(String input) {
+
+        List<Room> roomList = roomRepository.searchRooms(input);
+
+        List<RoomDTO> roomDTOList = modelMapper.map(roomList, new TypeToken<List<RoomDTO>>() {}.getType());
+
+        return Response.builder()
+                .status(200)
+                .message("Success")
+                .rooms(roomDTOList)
+                .build();
+
     }
-
-
-
 
     private String saveImage(MultipartFile imageFile) {
         if (!imageFile.getContentType().startsWith("image/")) {

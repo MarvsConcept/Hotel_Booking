@@ -24,5 +24,5 @@ public interface RoomService {
 
     List<RoomType> getAllRoomTypes();
 
-    Response searchRoom();
+    Response searchRoom(String input);
 }
