@@ -34,3 +34,4 @@ build/
 
 # Ignore config files
 application.properties
+product-image
