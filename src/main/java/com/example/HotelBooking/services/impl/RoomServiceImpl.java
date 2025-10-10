@@ -93,7 +93,6 @@ public class RoomServiceImpl implements RoomService {
         }
 
         return imagePath;
-
     }
 
 }
