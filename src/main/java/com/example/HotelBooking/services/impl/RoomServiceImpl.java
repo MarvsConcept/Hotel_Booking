@@ -2,6 +2,7 @@ package com.example.HotelBooking.services.impl;
 
 import com.example.HotelBooking.dtos.Response;
 import com.example.HotelBooking.dtos.RoomDTO;
+import com.example.HotelBooking.entities.Room;
 import com.example.HotelBooking.enums.RoomType;
 import com.example.HotelBooking.repositories.RoomRepository;
 import com.example.HotelBooking.services.RoomService;
@@ -28,7 +29,19 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Response addRoom(RoomDTO roomDTO, MultipartFile imageFile) {
-        return null;
+
+        Room roomToSave = modelMapper.map(roomDTO, Room.class);
+        if (imageFile != null) {
+            String imagePath = saveImage(imageFile);
+            roomToSave.setImageUrl(imagePath);
+        }
+
+        roomRepository.save(roomToSave);
+
+        return Response.builder()
+                .status(200)
+                .message("Room Successfully Added")
+                .build();
     }
 
     @Override
