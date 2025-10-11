@@ -122,7 +122,23 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response updateBooking(BookingDTO bookingDTO) {
-        return null;
+        if (bookingDTO.getId() == null) throw new NotFoundException("Booking id is required");
+
+        Booking existingBooking = bookingRepository.findById(bookingDTO.getId())
+                .orElseThrow(()-> new NotFoundException("Booking Not Found"));
+
+        if (bookingDTO.getBookingStatus() != null) {
+            existingBooking.setBookingStatus(bookingDTO.getBookingStatus());
+        }
+        if (bookingDTO.getPaymentStatus() != null) {
+            existingBooking.setPaymentStatus(bookingDTO.getPaymentStatus());
+        }
+        bookingRepository.save(existingBooking);
+
+        return Response.builder()
+                .status(200)
+                .message("Booking Updated Successfully")
+                .build();
     }
 
     private BigDecimal calculateTotalPrice(Room room, BookingDTO bookingDTO) {
