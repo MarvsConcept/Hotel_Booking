@@ -109,7 +109,15 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Response findBookingByReferenceNo(String bookingReference) {
-        return null;
+        Booking booking = bookingRepository.findByBookingReference(bookingReference)
+                .orElseThrow(()-> new NotFoundException("Booking with reference No: " + bookingReference + "Not found"));
+
+        BookingDTO bookingDTO = modelMapper.map(booking, BookingDTO.class);
+        return Response.builder()
+                .status(200)
+                .message("success")
+                .booking(bookingDTO)
+                .build();
     }
 
     @Override
