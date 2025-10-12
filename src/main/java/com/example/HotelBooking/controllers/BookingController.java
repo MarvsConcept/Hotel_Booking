@@ -27,9 +27,11 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.createBooking(bookingDTO));
     }
 
-    @PostMapping("/{reference}")
+    @GetMapping("/{reference}")
     public ResponseEntity<Response> findBookingByReferenceNo(@PathVariable String reference) {
         return ResponseEntity.ok(bookingService.findBookingByReferenceNo(reference));
     }
+
+
 
 }
