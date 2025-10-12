@@ -32,6 +32,10 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.findBookingByReferenceNo(reference));
     }
 
-
+    @PutMapping("/update")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> updateBooking(@RequestBody BookingDTO bookingDTO) {
+        return ResponseEntity.ok(bookingService.updateBooking(bookingDTO));
+    }
 
 }
