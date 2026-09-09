@@ -1,7 +1,6 @@
 package com.example.HotelBooking.repositories;
 
 import com.example.HotelBooking.entities.Booking;
-import com.example.HotelBooking.entities.BookingReference;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
