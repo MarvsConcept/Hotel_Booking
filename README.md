@@ -16,11 +16,7 @@ This repository contains the backend only. Booking emails link to a separate fro
 - [Example workflow](#example-workflow)
 - [Booking rules and data model](#booking-rules-and-data-model)
 - [Responses and errors](#responses-and-errors)
-- [Build and tests](#build-and-tests)
-- [Troubleshooting](#troubleshooting)
-- [Current limitations](#current-limitations)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
